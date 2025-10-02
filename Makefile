@@ -63,8 +63,6 @@ test-verbose:
 clean:
 	@echo "$(GREEN)Cleaning build artifacts...$(NC)"
 	swift package clean
-	rm -rf .build
-
 ## run: Run the CLI application
 run: build
 	@echo "$(GREEN)Running $(CLI_NAME)...$(NC)"
