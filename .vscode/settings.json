@@ -1,0 +1,17 @@
+{
+  "swift.path": "/usr/bin/swift",
+  "swift.buildPath": ".build",
+  "sourcekit-lsp.serverPath": "/usr/bin/sourcekit-lsp",
+  "lldb.library": "/usr/lib/liblldb.so",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "sswg.swift-lang",
+  "files.exclude": {
+    "**/.build": true,
+    "**/.swiftpm": true,
+    "**/xcuserdata": true
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "swift": true
+  }
+}
