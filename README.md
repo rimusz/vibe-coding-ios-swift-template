@@ -55,21 +55,41 @@ VS Code will prompt you to install the recommended extensions. Click "Install Al
 
 ### 5. Build the Project
 
+Using Swift directly:
 ```bash
 swift build
 ```
 
+Or using the Makefile:
+```bash
+make build
+```
+
 ### 6. Run Tests
 
+Using Swift directly:
 ```bash
 swift test
 ```
 
+Or using the Makefile:
+```bash
+make test
+```
+
 ### 7. Run the CLI Demo
 
+Using Swift directly:
 ```bash
 swift run MySwiftAppCLI
 ```
+
+Or using the Makefile:
+```bash
+make run
+```
+
+> 💡 **Tip**: Run `make help` to see all available Makefile targets.
 
 ## 🏗️ Project Structure
 
@@ -146,7 +166,27 @@ The example code includes tests for:
 
 ## 🔨 Development Tasks
 
-VS Code tasks are pre-configured for common operations:
+### Makefile Commands
+
+A comprehensive Makefile is provided for common tasks:
+
+```bash
+make help          # Show all available commands
+make build         # Build the project in debug mode
+make release       # Build in release mode with optimizations
+make test          # Run all tests
+make test-verbose  # Run tests with verbose output
+make run           # Build and run the CLI application
+make clean         # Remove build artifacts
+make lint          # Run SwiftLint (if installed)
+make format        # Auto-format code with SwiftLint
+make install       # Resolve dependencies
+make all           # Build and test
+```
+
+### VS Code Tasks
+
+VS Code tasks are also pre-configured for common operations:
 
 - **Swift Build** (⌘+Shift+B): Compile the project
 - **Swift Test**: Run all tests
