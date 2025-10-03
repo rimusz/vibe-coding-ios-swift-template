@@ -114,7 +114,7 @@ When providing assistance:
 ## Tools & Technologies
 
 This project uses:
-- Swift 5.9+
+- Swift 6.0+
 - SwiftUI and UIKit
 - XcodeGen for project file generation
 - xcrun for command-line tool invocation
@@ -122,7 +122,6 @@ This project uses:
 - Xcode and VS Code
 - LLDB debugger
 - XCTest framework
-- SourceKit-LSP for language server support
 
 ## Project Structure
 

@@ -2,7 +2,13 @@
   "recommendations": [
     "github.copilot",
     "github.copilot-chat",
-    "sswg.swift-lang",
+    "github.vscode-github-actions",
+    "github.vscode-pull-request-github",
+    "llvm-vs-code-extensions.lldb-dap",
+    "ms-vscode.makefile-tools",
+    "redhat.vscode-yaml",
+    "sweetpad.sweetpad",
+    "swiftlang.swift-vscode",
     "vadimcn.vscode-lldb"
   ]
 }

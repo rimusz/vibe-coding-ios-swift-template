@@ -1,0 +1,132 @@
+name: MySwiftApp
+
+# Package dependencies
+packages:
+  ZipArchive:
+    url: https://github.com/ZipArchive/ZipArchive.git
+    from: 2.5.5
+
+options:
+  bundleIdPrefix: MY_BUNDLE_PREFIX
+  createIntermediateGroups: true
+  defaultConfig: Debug
+  deploymentTarget:
+    iOS: "18.0"
+  
+settings:
+  base:
+    PRODUCT_NAME: MySwiftApp
+    DISPLAY_NAME: "MySwiftApp"
+    MARKETING_VERSION: "1.0.1"
+    CURRENT_PROJECT_VERSION: "5"
+    SWIFT_VERSION: "6.0"
+    ENABLE_STRICT_CONCURRENCY: true
+    IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+  configs:
+    Debug:
+      EMIT_FRONTEND_COMMAND_LINES: YES
+    Release:
+      EMIT_FRONTEND_COMMAND_LINES: NO
+
+targets:
+  MySwiftApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        name: MySwiftApp
+        type: group
+        excludes:
+          - "**/*.md"
+    resources:
+      - Sources/Assets.xcassets
+      - Sources/MySwiftApp.xcdatamodeld
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: MY_BUNDLE_ID
+        DISPLAY_NAME: "MySwiftApp"
+        APP_CATEGORY: "public.app-category.productivity"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: true
+        DEVELOPMENT_TEAM: MY_TEAM_ID
+        CODE_SIGN_STYLE: Automatic
+        INFOPLIST_FILE: Info.plist
+        SUPPORTS_MACCATALYST: true
+        TARGETED_DEVICE_FAMILY: "1,2"
+      configs:
+        Debug:
+          EMIT_FRONTEND_COMMAND_LINES: YES
+        Release:
+          EMIT_FRONTEND_COMMAND_LINES: NO
+
+    dependencies:
+      - package: ZipArchive
+    entitlements:
+      path: MySwiftApp.entitlements
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: "MySwiftApp"
+        CFBundleIdentifier: MY_BUNDLE_ID
+        CFBundleName: MySwiftApp
+        CFBundlePackageType: APPL
+        CFBundleShortVersionString: "1.0.1"
+        CFBundleVersion: "5"
+        LSApplicationCategoryType: "public.app-category.productivity"
+        LSRequiresIPhoneOS: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIRequiredDeviceCapabilities:
+          - arm64
+        NSPhotoLibraryUsageDescription: "MySwiftApp needs access to photos to search and analyze images for text content."
+        NSDocumentsFolderUsageDescription: "MySwiftApp needs access to documents to provide AI-powered search and insights."
+        NSPrivacyAccessedAPITypes:
+          - NSPrivacyAccessedAPITypeFileTimestamp
+          - NSPrivacyAccessedAPITypeSystemBootTime
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: false
+
+  MySwiftAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+        name: MySwiftAppTests
+        type: group
+        excludes:
+          - "**/*.md"
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: MY_BUNDLE_ID.tests
+      DEVELOPMENT_TEAM: MY_TEAM_ID
+      CODE_SIGN_STYLE: Automatic
+      TARGETED_DEVICE_FAMILY: "1,2"
+      SWIFT_VERSION: "6.0"
+      ENABLE_STRICT_CONCURRENCY: true
+      IPHONEOS_DEPLOYMENT_TARGET: "18.0"
+      GENERATE_INFOPLIST_FILE: true
+      PRODUCT_NAME: MySwiftAppTests
+    dependencies:
+      - target: MySwiftApp
+        link: false
+
+schemes:
+  MySwiftApp:
+    build:
+      targets:
+        MySwiftApp: all
+        MySwiftAppTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - MySwiftAppTests
+    archive:
+      config: Release

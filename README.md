@@ -1,326 +1,407 @@
-# 🚀 Vibe Coding iOS/Mac Swift Template
+# Vibe Coding Setup for iOS/Mac Apps in Swift with VS Code
 
-A production-ready template for building iOS and macOS applications with Swift, designed for modern development with VS Code, GitHub Copilot Agent, and Claude Sonnet 4.x.
+This repository demonstrates "vibe coding" for iOS/Swift development in VS Code—emphasizing fast, AI-assisted iterations with hot-reloading, automated builds via Makefile, and XcodeGen project management. You'll use VS Code for editing with GitHub Copilot, while leveraging Xcode for simulators and deployment.
 
-## ✨ Features
+**Key Features:**
 
-- 🎯 **Swift Package Manager** - Modern dependency management
-- 🧪 **XCTest Framework** - Comprehensive testing setup
-- 🤖 **GitHub Copilot Agent** - AI-powered coding assistance with custom agents
-- 🛠️ **VS Code Integration** - Optimized settings and tasks
-- 📱 **iOS/macOS Support** - Cross-platform development
-- 🎨 **Best Practices** - Following Swift API Design Guidelines
-- 🔍 **Type-Safe** - Leveraging Swift's powerful type system
-- ⚡ **Async/Await** - Modern concurrency patterns
+- **XcodeGen Project Management**: Define your Xcode project in `project.yml` and generate `.xcodeproj` files programmatically
+- **Makefile Build System**: Comprehensive build, test, and deployment commands (820+ lines)
+- **AI-Assisted Development**: GitHub Copilot with Claude Sonnet 4+ and Grok 4 fast for prompt generation
+- **Hot-Reloading**: InjectionIII integration for live SwiftUI updates
+- **Swift 6.0**: Modern concurrency with strict concurrency checking enabled
+- **Multi-Platform**: iOS 18.0+ support with Mac Catalyst compatibility
 
-## 📋 Prerequisites
+Tested with Swift 6.0, Xcode 26+, macOS Tahoe+, October 2025.
 
-- **macOS**: 13.0 or later (for macOS development)
-- **Xcode**: 15.0 or later
-- **Swift**: 5.9 or later
-- **VS Code**: Latest version
-- **GitHub Copilot**: Active subscription
+## Project Structure
 
-### Required VS Code Extensions
-
-Install the recommended extensions when prompted, or manually install:
-
-- **GitHub Copilot** (`github.copilot`)
-- **GitHub Copilot Chat** (`github.copilot-chat`)
-- **Swift Language Support** (`sswg.swift-lang`)
-- **CodeLLDB** (`vadimcn.vscode-lldb`)
-
-## 🚀 Getting Started
-
-### 1. Use This Template
-
-Click the "Use this template" button on GitHub to create a new repository from this template.
-
-### 2. Clone Your Repository
-
-```bash
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-cd YOUR-REPO-NAME
-```
-
-### 3. Open in VS Code
-
-```bash
-code .
-```
-
-### 4. Install Extensions
-
-VS Code will prompt you to install the recommended extensions. Click "Install All" to get started.
-
-### 5. Build the Project
-
-Using Swift directly:
-```bash
-swift build
-```
-
-Or using the Makefile:
-```bash
-make build
-```
-
-### 6. Run Tests
-
-Using Swift directly:
-```bash
-swift test
-```
-
-Or using the Makefile:
-```bash
-make test
-```
-
-### 7. Run the CLI Demo
-
-Using Swift directly:
-```bash
-swift run MySwiftAppCLI
-```
-
-Or using the Makefile:
-```bash
-make run
-```
-
-> 💡 **Tip**: Run `make help` to see all available Makefile targets.
-
-## 🏗️ Project Structure
-
-```
-.
-├── .github/
-│   └── agents/              # GitHub Copilot Agent configurations
-│       ├── swift-developer.md    # Swift development expert
-│       └── code-reviewer.md      # Code review assistant
-├── .vscode/
-│   ├── extensions.json      # Recommended extensions
-│   ├── settings.json        # VS Code settings
-│   ├── tasks.json          # Build and test tasks
-│   └── launch.json         # Debug configurations
+```text
+vibe-coding-ios-swift/
 ├── Sources/
-│   ├── MySwiftApp/         # Main library code
-│   │   └── MySwiftApp.swift
-│   └── MySwiftAppCLI/      # CLI executable
-│       └── main.swift
+│   ├── MySwiftApp/          # Main iOS app source code
+│   └── MySwiftAppCLI/        # Command-line interface
 ├── Tests/
-│   └── MySwiftAppTests/    # Test files
-│       └── MySwiftAppTests.swift
-├── Package.swift           # Swift Package Manager manifest
-└── README.md              # This file
+│   └── MySwiftAppTests/      # Unit and integration tests
+├── docs/                     # Documentation
+│   ├── APP_ICON_SETUP.md
+│   ├── APP_STORE_SCREENSHOTS.md
+│   └── SCREENSHOTS_QUICK_REF.md
+├── scripts/                  # Build and utility scripts
+│   ├── generate-icons.sh
+│   └── resize-screenshots.sh
+├── .vscode/                  # VS Code workspace settings
+│   ├── settings.json         # Editor and formatter config
+│   └── extensions.json       # Recommended extensions
+├── .github/
+│   └── copilot-instructions.md  # AI coding guidelines
+├── project.yml               # XcodeGen project definition
+├── makefile                  # Build automation (820+ lines)
+├── Info.plist                # App metadata
+└── ExportOptions.plist       # App Store export config
 ```
 
-## 🤖 GitHub Copilot Agents
+## Prerequisites
 
-This template includes pre-configured GitHub Copilot agents to assist with Swift development:
+- **macOS Tahoe or later**
+- **Xcode 26+** - Download from App Store or [developer.apple.com](https://developer.apple.com)
+- **Homebrew** - Install via:
 
-### Swift Developer Agent
+  ```bash
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ```
 
-Specialized in writing idiomatic Swift code following Apple's best practices. Use it for:
+- **GitHub Copilot subscription** - Pro, Pro+, Business, or Enterprise (includes Claude Sonnet 4+ access)
+- **Apple Developer Account** - Required for physical device testing and deployment
 
-- Writing new features
-- Implementing Swift patterns
-- SwiftUI and UIKit development
-- Async/await and concurrency
+## Installation
 
-### Code Reviewer Agent
+### Step 1: Install VS Code
 
-Provides thorough code reviews focusing on:
+Download and install from [code.visualstudio.com](https://code.visualstudio.com).
 
-- Code quality and best practices
-- Performance optimization
-- Memory management
-- Security considerations
+### Step 2: Install Homebrew Packages
 
-To use an agent in GitHub Copilot Chat, type `@swift-developer` or `@code-reviewer` followed by your question.
-
-## 🧪 Testing
-
-The template includes a comprehensive test suite using XCTest:
+These provide Swift tooling, formatting, and build integration. Run in Terminal:
 
 ```bash
-# Run all tests
-swift test
-
-# Run tests with verbose output
-swift test --verbose
-
-# Run specific test
-swift test --filter GreetingServiceTests
+brew install swift swiftformat xcode-build-server xcbeautify xcodegen
 ```
 
-### Test Coverage
+**Package Descriptions:**
 
-The example code includes tests for:
+- **swift**: Core Swift compiler and tools
+- **swiftformat**: Auto-formats Swift code
+- **xcode-build-server**: Enables build/run/debug via SweetPad extension
+- **xcbeautify**: Pretty-prints xcodebuild output
+- **xcodegen**: Generates Xcode project from `project.yml` spec
 
-- Unit tests for individual components
-- Async/await testing patterns
-- Model serialization (Codable)
-- Equality and identity
+### Step 3: Install VS Code Extensions
 
-## 🔨 Development Tasks
+This repository includes `.vscode/extensions.json` with 10 recommended extensions. Open the workspace in VS Code and install them via the Extensions panel notification, or manually install these extensions:
 
-### Makefile Commands
+- **GitHub Copilot** (`github.copilot`): AI code completion and suggestions
+- **GitHub Copilot Chat** (`github.copilot-chat`): Chat interface with Claude Sonnet 4+ support
+- **GitHub Actions** (`github.vscode-github-actions`): CI/CD workflow support
+- **GitHub Pull Requests and Issues** (`github.vscode-pull-request-github`): PR and issue management
+- **CodeLLDB** (`vadimcn.vscode-lldb`): Native debugger for Swift/C++
+- **LLDB DAP** (`llvm-vs-code-extensions.lldb-dap`): Debug Adapter Protocol for LLDB
+- **Makefile Tools** (`ms-vscode.makefile-tools`): Makefile IntelliSense and build integration
+- **YAML** (`redhat.vscode-yaml`): YAML language support with validation
+- **SweetPad** (`sweetpad.sweetpad`): Integrates xcodebuild for building/running/debugging in VS Code
+- **Swift** (`swiftlang.swift-vscode`): Official Swift extension with SourceKit-LSP for syntax highlighting, autocompletion, go-to-definition, and debugging
 
-A comprehensive Makefile is provided for common tasks:
+### Step 4: Install InjectionIII (for Hot-Reloading)
+
+InjectionIII enables live SwiftUI updates in the simulator without rebuilds.
+
+**Installation Options:**
+
+- **Via Mac App Store**: Search "InjectionIII" and install (free)
+- **Via GitHub**: Download from [github.com/johnno1962/InjectionIII/releases](https://github.com/johnno1962/InjectionIII/releases), unzip to `/Applications`
+
+Launch InjectionIII (menu bar icon appears). Grant Full Disk Access in System Settings > Privacy & Security if prompted.
+
+## Configuration
+
+### VS Code Workspace Settings
+
+This repository includes `.vscode/settings.json` with optimized settings:
+
+- **Formatter**: Swift extension (`swiftlang.swift-vscode`) set as default
+- **Format on Save**: Enabled for automatic code formatting
+- **File Exclusions**: Hides build artifacts (`.build`, `.swiftpm`, `xcuserdata`)
+- **GitHub Copilot**: Enabled for all file types including Swift
+- **Max Requests**: Set to 45 for extended Copilot chat sessions
+
+### Configure GitHub Copilot for Claude Sonnet 4+
+
+1. Ensure Copilot is active (sign in via VS Code's Accounts menu)
+2. Enable Claude Sonnet 4+:
+   - Open Copilot Chat (`Cmd+Shift+I` or click chat icon)
+   - In the model picker dropdown, select "Claude Sonnet 4.5"
+   - This provides faster, more accurate Swift 6.0 code generation
+
+### Configure InjectionIII
+
+1. Open InjectionIII menu bar > "Open Project" > Select your Xcode project folder
+2. In your app's entry point (e.g., `@main` struct):
+
+   ```swift
+   #if DEBUG
+   Bundle(path: "/Applications/InjectionIII.app/Contents/Resources/iOSInjection.bundle")?.load()
+   #endif
+   ```
+
+3. Note: `EMIT_FRONTEND_COMMAND_LINES = YES` is already configured in `project.yml` for Debug builds
+
+### Generate Xcode Project
+
+This project uses XcodeGen to manage the Xcode project. Generate it from `project.yml`:
 
 ```bash
-make help          # Show all available commands
-make build         # Build the project in debug mode
-make release       # Build in release mode with optimizations
-make test          # Run all tests
-make test-verbose  # Run tests with verbose output
-make run           # Build and run the CLI application
-make clean         # Remove build artifacts
-make lint          # Run SwiftLint (if installed)
-make format        # Auto-format code with SwiftLint
-make install       # Resolve dependencies
-make all           # Build and test
+xcodegen generate
 ```
 
-### VS Code Tasks
+Or use the Makefile:
 
-VS Code tasks are also pre-configured for common operations:
-
-- **Swift Build** (⌘+Shift+B): Compile the project
-- **Swift Test**: Run all tests
-- **Swift Run**: Execute the CLI
-- **Clean**: Remove build artifacts
-
-Access tasks via:
-- Command Palette: `Tasks: Run Task`
-- Keyboard: `⌘+Shift+B` (default build task)
-
-## 🐛 Debugging
-
-Two debug configurations are available:
-
-1. **Debug Swift App**: Debug the main application
-2. **Debug Swift Tests**: Debug test execution
-
-Start debugging:
-- Press `F5` or use the Debug panel
-- Set breakpoints by clicking in the gutter
-- Use the Debug Console for LLDB commands
-
-## 📝 Code Style & Best Practices
-
-This template follows Swift best practices:
-
-### Naming Conventions
-
-- **Types**: `PascalCase` (e.g., `GreetingService`, `Person`)
-- **Functions/Variables**: `camelCase` (e.g., `fetchPerson`, `firstName`)
-- **Constants**: `camelCase` (e.g., `maxRetries`)
-
-### Code Organization
-
-- Use `// MARK: -` for logical sections
-- Group related functionality together
-- Keep files focused and single-purpose
-
-### Swift Patterns
-
-- Prefer `struct` over `class` for value types
-- Use `let` instead of `var` when possible
-- Use `guard` for early exits
-- Leverage protocol-oriented programming
-- Handle errors explicitly with `Result` or `throws`
-
-### Async/Await
-
-```swift
-// Modern concurrency with async/await
-func fetchData() async throws -> Data {
-    let (data, _) = try await URLSession.shared.data(from: url)
-    return data
-}
+```bash
+make setup
 ```
 
-## 🔧 Customization
+This creates `MySwiftApp.xcodeproj` from the `project.yml` specification.
 
-### Renaming the Package
+## Usage
 
-1. Update `Package.swift` - change the `name` property
-2. Rename directories in `Sources/` and `Tests/`
-3. Update imports in Swift files
+### Opening Your Project
 
-### Adding Dependencies
+In VS Code: `File > Open Folder` > Select this repository's root directory.
 
-Edit `Package.swift` to add external dependencies:
+### Build System with Makefile
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/example/package.git", from: "1.0.0"),
-],
-targets: [
-    .target(
-        name: "MySwiftApp",
-        dependencies: [
-            .product(name: "PackageName", package: "package"),
-        ]),
-]
+This project includes an 820-line Makefile with comprehensive build automation. View all commands:
+
+```bash
+make help
 ```
 
-### iOS/macOS Deployment Targets
+**Common Commands:**
 
-Update the `platforms` array in `Package.swift`:
+```bash
+# Project Setup
+make setup              # Generate Xcode project from project.yml
+make clean              # Clean build artifacts
 
-```swift
-platforms: [
-    .iOS(.v17),      // Change iOS version
-    .macOS(.v14)     // Change macOS version
-]
+# Testing
+make test               # Run tests on simulator
+make test-device        # Run tests on physical device
+make test-coverage      # Generate code coverage report
+
+# Simulator Commands
+make build              # Build for iOS Simulator
+make run                # Build, install and run app on simulator
+make run-2-sims         # Run on both iPhone & iPad simulators
+make run-hot            # Build and run with InjectionIII hot-reloading
+
+# Physical Device Commands  
+make dev-build          # Build for device
+make dev-run            # Build and run on device (DEVICE=iphone|ipad)
+make dev-install        # Install on device without debugging
+
+# App Store Distribution
+make archive            # Create App Store archive
+make upload-testflight  # Upload to TestFlight
 ```
 
-## 🤝 Using with Claude Sonnet 4.x
+**Examples:**
 
-When working with Claude Sonnet 4.x for code generation and review:
+```bash
+# Run on iPad simulator
+make run SIM=ipad
 
-1. **Context Sharing**: Share relevant code files and the project structure
-2. **Specific Requests**: Be clear about what you want to build or improve
-3. **Iterative Development**: Use Claude for code review and refinement
-4. **Best Practices**: Ask Claude to ensure code follows Swift best practices
-5. **Testing**: Request test generation for new features
+# Run on physical iPhone
+make dev-run DEVICE=iphone
 
-### Example Prompts
+# Run tests with coverage
+make test-coverage
+```
 
-- "Review this Swift code for memory leaks and suggest improvements"
-- "Generate a SwiftUI view for displaying a list of persons"
-- "Write tests for the DataService actor covering edge cases"
-- "Refactor this code to use protocol-oriented programming"
+### Hot-Reloading with InjectionIII
 
-## 📚 Resources
+1. Start app in Xcode simulator (or via `make run-hot`)
+2. Edit SwiftUI code in VS Code and save
+3. InjectionIII injects changes—see live updates in simulator without rebuilding
 
-- [Swift.org](https://swift.org/) - Official Swift documentation
-- [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
-- [SwiftUI Documentation](https://developer.apple.com/documentation/swiftui)
-- [Async/Await in Swift](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
+**Tip**: Prompt Copilot for code, apply changes, then hot-reload for instant feedback.
 
-## 📄 License
+### AI-Assisted Vibe Coding with GitHub Copilot
 
-This template is available under the MIT License. Feel free to use it for any purpose.
+#### Inline Autocompletions
 
-## 🙏 Contributing
+Type in `.swift` files; Claude Sonnet 4+ suggests Swift 6.0-compliant code with modern async/await patterns.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+#### Chat Interface
 
-## 💡 Tips for Vibe Coding
+Open Copilot Chat (`Cmd+Shift+I`) with Claude Sonnet 4+ selected:
 
-**Vibe coding** is about maintaining flow and productivity with AI assistance:
+- **Fast code generation**: "Add a new SwiftUI view for user settings"
+- **Refactoring**: "Refactor this class to use async/await instead of completion handlers"
+- **Debugging**: "Fix the memory leak in this view controller"
+- **Apply Suggestions**: Accept diffs inline or via chat panel
 
-1. **Let AI Handle Boilerplate**: Use Copilot for repetitive code
-2. **Focus on Architecture**: Spend time on design, let AI fill details
-3. **Rapid Prototyping**: Quickly iterate with AI suggestions
-4. **Continuous Testing**: Write tests alongside features
-5. **Stay in Flow**: Use VS Code tasks and shortcuts to minimize context switching
-6. **Trust but Verify**: Review AI-generated code for correctness
+**Example Prompts:**
 
-Happy coding! 🎉
+```text
+In this file, add @MainActor to the ViewModel and fix concurrency warnings. Use Swift 6.0.
+```
+
+```text
+Plan a TCA feature for user authentication with async/await, then implement in SwiftUI.
+```
+
+### Copilot Instructions
+
+This repository includes `.github/copilot-instructions.md` with Swift development guidelines that GitHub Copilot automatically follows:
+
+- **Code Quality Standards**: Swift API Design Guidelines, descriptive naming, single-purpose functions
+- **Swift Best Practices**: Optional handling, type safety, protocol-oriented programming
+- **iOS/macOS Development**: SwiftUI, MVVM pattern, async/await
+- **Memory Management**: Avoid retain cycles, proper weak/unowned usage
+- **Performance**: Efficient algorithms, lazy properties, GCD for concurrency
+- **Testing**: XCTest unit tests, TDD approach, edge case coverage
+- **Security**: No hardcoded secrets, input validation, HTTPS communication
+
+Copilot uses these instructions to generate code that aligns with project standards.
+
+## Generating Effective Prompts for Copilot
+
+To maximize Claude Sonnet 4+'s speed and accuracy, craft prompts that are specific, contextual, and iterative.
+
+### Prompt Engineering Tips
+
+- **Be Specific**: Include app spec, APIs, or code snippets
+  - ✅ "Refactor this UserManager class to add caching with TTL of 5 minutes"
+  - ❌ "Improve this code"
+
+- **Provide Context**: Mention Swift version, frameworks, and requirements
+  - "Use Swift 6.0 concurrency"
+  - "Integrate with Core Data"
+  - "Handle loading/errors/offline states"
+
+- **Agentic/Step-by-Step**: Break complex tasks into plans
+  - "First create the data model, then the view model, then the SwiftUI view"
+
+- **Iterate**: Start simple, then refine
+  - "Improve this generated code for performance"
+  - "Add error handling to the previous implementation"
+
+- **iOS Best Practices**: Specify platform requirements
+  - "Make it hot-reloadable with InjectionIII"
+  - "Optimize for iOS 18+"
+  - "Support both iPhone and iPad"
+
+- **Avoid Vagueness**: Provide detailed specifications
+  - ✅ "Generate a SwiftUI note-taking app with these features: [details]"
+  - ❌ "Make an app"
+
+### Example: Complete App Generation
+
+**App Spec**: Build a basic iOS note-taking app using SwiftUI, TCA (Composable Architecture), and Core Data. Features: Add/edit/delete notes, searchable list, async save/load with error handling, loading states. Use Swift 6.0 concurrency.
+
+**Prompt for Copilot Chat:**
+
+```text
+Using TCA and SwiftUI in Swift 6.0, generate a complete note-taking app feature with Core Data integration. 
+
+App Spec:
+- Model: Note entity with id, title, content, timestamp
+- Views: NavigationStack with searchable List of notes; detail view for edit; add button
+- Actions: Load notes async, add/edit/delete with persistence, handle errors (alert on save fail)
+- States: Loading, loaded with notes array, error message
+- Reducer: Use async/await for Core Data ops; include pull-to-refresh
+
+Output full code: Feature reducer, views, and Core Data setup. Make it modular for an existing Xcode project and hot-reloadable with InjectionIII.
+```
+
+**Expected Flow**: Copilot generates code diffs/files → Apply to your project → Hot-reload in simulator → Iterate with follow-up prompts.
+
+## Using Grok 4 Fast for Prompt Generation
+
+For complex app development, use **Grok 4 fast** to generate comprehensive prompts that you then use with GitHub Copilot. Grok 4 fast excels at understanding high-level requirements and translating them into detailed, actionable prompts.
+
+### Workflow
+
+1. **Describe your app idea to Grok 4 fast** in natural language with key features, tech stack, and constraints
+2. **Ask Grok 4 fast to generate a detailed prompt** that includes:
+   - Full app specification with features
+   - Technical requirements (Swift 6.0, SwiftUI, TCA, etc.)
+   - Architecture patterns and best practices
+   - Error handling and edge cases
+   - Performance considerations
+3. **Copy the generated prompt** and paste into GitHub Copilot Chat (with Claude Sonnet 4+)
+4. **Review and refine** the generated code, then hot-reload with InjectionIII
+
+### Example Grok 4 Fast Meta-Prompt
+
+```text
+I want to build an iOS app using Swift 6.0, SwiftUI, and TCA (The Composable Architecture). 
+
+My app idea: [Describe your app - e.g., "A habit tracker with daily reminders, progress charts, and iCloud sync"]
+
+Please generate a comprehensive prompt that I can use with GitHub Copilot to implement this app. The prompt should include:
+- Complete app specification with all features
+- Technical stack (Swift 6.0, SwiftUI, TCA, Core Data/CloudKit)
+- Architecture patterns and folder structure
+- State management approach
+- Error handling and loading states
+- Best practices for iOS 18+
+- Instructions for making it hot-reloadable with InjectionIII
+
+Format the output as a ready-to-use prompt for GitHub Copilot.
+```
+
+### Why Use Grok 4 Fast for Prompt Generation
+
+- **Speed**: Processes complex requirements quickly and generates well-structured prompts
+- **Comprehensiveness**: Considers edge cases, best practices, and technical details you might miss
+- **Optimization**: Understands how to structure prompts for maximum effectiveness with code generation models
+- **Iteration**: Refine the prompt with Grok before sending to Copilot, saving development time
+
+This two-step approach (Grok for prompt → Copilot for code) combines strategic planning with tactical implementation for faster, higher-quality iOS app development.
+
+## Documentation
+
+Additional documentation is available in the `docs/` directory:
+
+- **[APP_ICON_SETUP.md](docs/APP_ICON_SETUP.md)**: Guide for creating and configuring app icons
+- **[APP_STORE_SCREENSHOTS.md](docs/APP_STORE_SCREENSHOTS.md)**: Screenshot requirements and guidelines
+- **[SCREENSHOTS_QUICK_REF.md](docs/SCREENSHOTS_QUICK_REF.md)**: Quick reference for screenshot specifications
+
+## Scripts
+
+Utility scripts are available in the `scripts/` directory:
+
+- **`generate-icons.sh`**: Automated app icon generation from source image
+- **`resize-screenshots.sh`**: Batch resize screenshots for App Store submission
+
+## Tips for Maximum Productivity
+
+- **Cmd+Tab Workflow**: Switch between VS Code (editing) and Xcode Simulator (testing)
+- **Optimize Prompts**: Test with small features; Claude Sonnet 4+ is fast but always review outputs
+- **Code Review**: Run `swiftlint` or Xcode analyzer on AI-generated code
+- **Use Makefile**: Leverage build automation instead of manual xcodebuild commands
+- **XcodeGen**: Keep `project.yml` as source of truth; regenerate `.xcodeproj` as needed
+- **Hot-Reload**: Maximize iteration speed with InjectionIII for SwiftUI views
+- **Version Control**: Commit `project.yml` and `.xcodeproj`
+- **Extensions**: Keep VS Code extensions updated for latest features
+- **Copilot Instructions**: Customize `.github/copilot-instructions.md` for project-specific guidelines
+
+## Project Configuration
+
+- **Swift Version**: 6.0 with strict concurrency enabled
+- **Deployment Target**: iOS 18.0+
+- **Platforms**: iPhone, iPad, Mac Catalyst
+- **Bundle ID**: MY_BUNDLE_ID
+- **Build System**: XcodeGen + Makefile
+- **Dependencies**: ZipArchive (via Swift Package Manager)
+- **Testing**: XCTest with unit and integration tests
+
+## Contributing
+
+This repository follows Swift best practices defined in `.github/copilot-instructions.md`. When contributing:
+
+1. Use XcodeGen to modify project structure (edit `project.yml`, then run `make setup`)
+2. Follow Swift API Design Guidelines
+3. Write unit tests for new functionality
+4. Use Swift 6.0 concurrency patterns (async/await, actors)
+5. Ensure code passes `swiftlint` and Xcode analyzer
+6. Test with InjectionIII hot-reloading where applicable
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+---
+
+**Questions or Issues?** Check the documentation in `docs/` or review `.github/copilot-instructions.md` for coding guidelines. For build issues, consult `make help` for available commands.
+
+This setup makes VS Code a Swift vibe-coding powerhouse—AI-driven edits, hot-reloads, and automated builds. Happy coding! 🚀
