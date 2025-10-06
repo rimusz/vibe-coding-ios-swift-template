@@ -6,7 +6,7 @@ This repository demonstrates "vibe coding" for iOS/Swift development in VS Code�
 
 - **XcodeGen Project Management**: Define your Xcode project in `project.yml` and generate `.xcodeproj` files programmatically
 - **Makefile Build System**: Comprehensive build, test, and deployment commands (820+ lines)
-- **AI-Assisted Development**: GitHub Copilot with Claude Sonnet 4+ and Grok 4 fast for prompt generation
+- **AI-Assisted Development**: Multi-model approach with Claude Sonnet 4+ for initial setup and Grok Code Fast 1 for ongoing development
 - **Hot-Reloading**: InjectionIII integration for live SwiftUI updates
 - **Swift 6.0**: Modern concurrency with strict concurrency checking enabled
 - **Multi-Platform**: iOS 18.0+ support with Mac Catalyst compatibility
@@ -50,7 +50,7 @@ vibe-coding-ios-swift/
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ```
 
-- **GitHub Copilot subscription** - Pro, Pro+, Business, or Enterprise (includes Claude Sonnet 4+ access)
+- **GitHub Copilot subscription** - Pro, Pro+, Business, or Enterprise (includes access to Claude Sonnet 4+ and Grok Code Fast 1)
 - **Apple Developer Account** - Required for physical device testing and deployment
 
 ## Installation
@@ -113,13 +113,19 @@ This repository includes `.vscode/settings.json` with optimized settings:
 - **GitHub Copilot**: Enabled for all file types including Swift
 - **Max Requests**: Set to 45 for extended Copilot chat sessions
 
-### Configure GitHub Copilot for Claude Sonnet 4+
+### Configure GitHub Copilot with Multiple AI Models
 
 1. Ensure Copilot is active (sign in via VS Code's Accounts menu)
-2. Enable Claude Sonnet 4+:
+2. Access different AI models via the model picker:
    - Open Copilot Chat (`Cmd+Shift+I` or click chat icon)
-   - In the model picker dropdown, select "Claude Sonnet 4.5"
-   - This provides faster, more accurate Swift 6.0 code generation
+   - Use the model picker dropdown to switch between models:
+     - **"Claude Sonnet 4.5"** - For initial project setup and complex architecture
+     - **"Grok Code Fast 1"** - For ongoing development and fast iterations
+   
+   **Recommended Workflow:**
+   - Start with Claude Sonnet 4.5 for project creation from this template
+   - Switch to Grok Code Fast 1 for daily coding tasks
+   - Return to Claude Sonnet 4.5 for complex architectural challenges
 
 ### Configure InjectionIII
 
@@ -217,16 +223,24 @@ make test-coverage
 
 #### Inline Autocompletions
 
-Type in `.swift` files; Claude Sonnet 4+ suggests Swift 6.0-compliant code with modern async/await patterns.
+Type in `.swift` files; GitHub Copilot suggests Swift 6.0-compliant code with modern async/await patterns.
 
 #### Chat Interface
 
-Open Copilot Chat (`Cmd+Shift+I`) with Claude Sonnet 4+ selected:
+Open Copilot Chat (`Cmd+Shift+I`):
 
+**For Initial Setup**: Select "Claude Sonnet 4.5"
+- **Project architecture**: "Create the complete app structure using TCA and Core Data"
+- **Complex features**: "Implement advanced iCloud sync with conflict resolution"
+- **Major refactoring**: "Refactor the entire app to use async/await throughout"
+
+**For Ongoing Development**: Select "Grok Code Fast 1"
 - **Fast code generation**: "Add a new SwiftUI view for user settings"
-- **Refactoring**: "Refactor this class to use async/await instead of completion handlers"
+- **Quick refactoring**: "Refactor this class to use async/await instead of completion handlers"
 - **Debugging**: "Fix the memory leak in this view controller"
-- **Apply Suggestions**: Accept diffs inline or via chat panel
+- **Feature additions**: "Add pull-to-refresh functionality to the list view"
+
+**Apply Suggestions**: Accept diffs inline or via chat panel
 
 **Example Prompts:**
 
@@ -254,7 +268,7 @@ Copilot uses these instructions to generate code that aligns with project standa
 
 ## Generating Effective Prompts for Copilot
 
-To maximize Claude Sonnet 4+'s speed and accuracy, craft prompts that are specific, contextual, and iterative.
+To maximize effectiveness with both Claude Sonnet 4+ and Grok Code Fast 1, craft prompts that are specific, contextual, and iterative.
 
 ### Prompt Engineering Tips
 
@@ -304,49 +318,91 @@ Output full code: Feature reducer, views, and Core Data setup. Make it modular f
 
 **Expected Flow**: Copilot generates code diffs/files → Apply to your project → Hot-reload in simulator → Iterate with follow-up prompts.
 
-## Using Grok 4 Fast for Prompt Generation
+## Recommended AI Model Workflow
 
-For complex app development, use **Grok 4 fast** to generate comprehensive prompts that you then use with GitHub Copilot. Grok 4 fast excels at understanding high-level requirements and translating them into detailed, actionable prompts.
+For optimal iOS app development, use different AI models for different phases of development:
+
+### Initial Project Setup
+
+Use **Claude Sonnet 4+** (via GitHub Copilot) for creating your Swift app project from scratch. Claude Sonnet 4+ excels at:
+- Setting up the initial project structure from this repository skeleton
+- Creating comprehensive app architecture
+- Establishing proper patterns and best practices
+- Setting up Core Data, TCA, or other foundational frameworks
+
+### Ongoing Development
+
+Use **Grok Code Fast 1** for the rest of your coding after initial setup. Grok Code Fast 1 is optimized for:
+- Fast code generation and iterations
+- Refactoring existing code
+- Adding new features to established projects
+- Bug fixes and minor enhancements
+
+### Complex Features
+
+For very complex parts or when you encounter challenging architectural decisions, **switch back to Claude Sonnet 4+**. Use Claude Sonnet 4+ when you need:
+- Deep architectural refactoring
+- Complex algorithm implementation
+- Advanced concurrency patterns
+- Resolving difficult bugs or performance issues
 
 ### Workflow
 
-1. **Describe your app idea to Grok 4 fast** in natural language with key features, tech stack, and constraints
-2. **Ask Grok 4 fast to generate a detailed prompt** that includes:
-   - Full app specification with features
-   - Technical requirements (Swift 6.0, SwiftUI, TCA, etc.)
-   - Architecture patterns and best practices
-   - Error handling and edge cases
-   - Performance considerations
-3. **Copy the generated prompt** and paste into GitHub Copilot Chat (with Claude Sonnet 4+)
-4. **Review and refine** the generated code, then hot-reload with InjectionIII
+1. **Start with Claude Sonnet 4+**: Create your initial Swift app project, reusing the skeleton from this git repository
+   - Open Copilot Chat (`Cmd+Shift+I`) and select "Claude Sonnet 4.5"
+   - Describe your app with full specifications, tech stack (Swift 6.0, SwiftUI, TCA, etc.)
+   - Let Claude Sonnet 4+ set up the project structure, architecture patterns, and foundational code
+   
+2. **Switch to Grok Code Fast 1**: For all subsequent coding tasks
+   - In Copilot Chat, select "Grok Code Fast 1" from the model picker
+   - Use for feature additions, refactoring, and day-to-day development
+   
+3. **Return to Claude Sonnet 4+ when needed**: For complex architectural challenges
+   - Switch back to "Claude Sonnet 4.5" for sophisticated problems
+   - Once resolved, return to Grok Code Fast 1 for continued development
+   
+4. **Review and refine** all generated code, then hot-reload with InjectionIII
 
-### Example Grok 4 Fast Meta-Prompt
+### Example: Initial Project Setup with Claude Sonnet 4+
 
 ```text
-I want to build an iOS app using Swift 6.0, SwiftUI, and TCA (The Composable Architecture). 
+I want to create an iOS app from scratch using this vibe-coding-ios-swift-template repository skeleton.
 
 My app idea: [Describe your app - e.g., "A habit tracker with daily reminders, progress charts, and iCloud sync"]
 
-Please generate a comprehensive prompt that I can use with GitHub Copilot to implement this app. The prompt should include:
-- Complete app specification with all features
-- Technical stack (Swift 6.0, SwiftUI, TCA, Core Data/CloudKit)
-- Architecture patterns and folder structure
-- State management approach
-- Error handling and loading states
-- Best practices for iOS 18+
-- Instructions for making it hot-reloadable with InjectionIII
+Using this existing project structure, please:
+- Set up the complete app architecture using Swift 6.0, SwiftUI, and TCA (The Composable Architecture)
+- Create the foundational data models and Core Data/CloudKit setup
+- Establish proper folder structure following the existing patterns
+- Implement state management with TCA
+- Set up error handling and loading states
+- Configure for hot-reloading with InjectionIII
+- Follow iOS 18+ best practices
 
-Format the output as a ready-to-use prompt for GitHub Copilot.
+Start with the core architecture and main features. I'll use Grok Code Fast 1 for subsequent iterations and additions.
 ```
 
-### Why Use Grok 4 Fast for Prompt Generation
+### Example: Ongoing Development with Grok Code Fast 1
 
-- **Speed**: Processes complex requirements quickly and generates well-structured prompts
-- **Comprehensiveness**: Considers edge cases, best practices, and technical details you might miss
-- **Optimization**: Understands how to structure prompts for maximum effectiveness with code generation models
-- **Iteration**: Refine the prompt with Grok before sending to Copilot, saving development time
+After your initial setup with Claude Sonnet 4+, use Grok Code Fast 1 for faster iterations:
 
-This two-step approach (Grok for prompt → Copilot for code) combines strategic planning with tactical implementation for faster, higher-quality iOS app development.
+```text
+Add a new feature to display weekly progress charts in the habit tracker.
+- Create a new SwiftUI view for the chart
+- Use Swift Charts framework
+- Fetch data from existing Core Data store
+- Add navigation from the main list
+- Include loading and error states
+```
+
+### Why This Multi-Model Approach
+
+- **Claude Sonnet 4+ for Setup**: Superior at understanding complex architectural requirements and establishing solid foundations
+- **Grok Code Fast 1 for Development**: Optimized for speed and efficiency in day-to-day coding tasks
+- **Strategic Switching**: Use the right tool for the right job—comprehensive planning with Claude, fast iterations with Grok
+- **Cost Effective**: Reserve Claude Sonnet 4+ for where it matters most while using faster models for routine work
+
+This multi-model approach combines strategic architecture planning with rapid implementation for faster, higher-quality iOS app development.
 
 ## Documentation
 
@@ -366,7 +422,8 @@ Utility scripts are available in the `scripts/` directory:
 ## Tips for Maximum Productivity
 
 - **Cmd+Tab Workflow**: Switch between VS Code (editing) and Xcode Simulator (testing)
-- **Optimize Prompts**: Test with small features; Claude Sonnet 4+ is fast but always review outputs
+- **Model Selection**: Use Claude Sonnet 4+ for initial setup and complex features, Grok Code Fast 1 for everything else
+- **Optimize Prompts**: Test with small features and always review AI outputs regardless of model
 - **Code Review**: Run `swiftlint` or Xcode analyzer on AI-generated code
 - **Use Makefile**: Leverage build automation instead of manual xcodebuild commands
 - **XcodeGen**: Keep `project.yml` as source of truth; regenerate `.xcodeproj` as needed
